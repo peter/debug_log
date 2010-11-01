@@ -9,15 +9,18 @@ class Binding
 end
 
 module DebugLog
-  mattr_accessor :logger
-  self.logger = nil
+  @@logger = nil
+  def self.logger; @@logger; end
+  def self.logger=(logger); @@logger = logger; end
 
-  mattr_accessor :stdout
-  self.stdout = true
+  @@stdout = true
+  def self.stdout; @@stdout; end
+  def self.stdout=(stdout); @@stdout = stdout; end
 
-  mattr_accessor :enabled
-  self.enabled = true
-
+  @@enabled = true
+  def self.enabled; @@enabled; end
+  def self.enabled=(enabled); @@enabled = enabled; end
+  
   def self.prefix
     name
   end

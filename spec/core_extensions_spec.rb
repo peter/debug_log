@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "core extensions"
+describe "core extensions" do
   describe "Kernel.debug" do
     it "should return a Binding object" do
       debug.is_a?(Binding).should be_true
