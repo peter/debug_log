@@ -33,7 +33,7 @@ module DebugLog
     return unless enabled
     message = [prefix, comment, expression_string(binding, *expressions), calling_method].join(separator)
     puts(message) if stdout
-    logger.info(message) if logger
+    logger.call(message) if logger
   end
 
   def self.expression_string(binding, *expressions)

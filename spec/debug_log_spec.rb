@@ -39,9 +39,9 @@ describe DebugLog do
       invoke_log
     end
 
-    it "invokes info on the logger object if there is one" do
+    it "invokes logger object if there is one" do
       logger = Logger.new($stdout)
-      DebugLog.logger = logger
+      DebugLog.logger = lambda { |message| logger.info(message) }
 
       log_expectations
       DebugLog.expects(:puts).with(@expected_message)
@@ -71,7 +71,7 @@ describe DebugLog do
   describe "logger" do
     it "defaults to nil but can be initialized to a logger object" do
       DebugLog.logger.should be_nil
-      logger = Logger.new($stdout)
+      logger = lambda { |message| puts message }
       DebugLog.logger = logger
       DebugLog.logger.should == logger
     end

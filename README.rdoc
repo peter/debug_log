@@ -1,0 +1,30 @@
+= Debug Log
+
+This is a simple RubyGem that provides a more convenient and powerful way of doing debug printouts than using
+puts or a logger directly.
+
+== Usage
+
+Require the gem. If you are using Bundler, add this to your Gemfile:
+
+ gem 'debug_log', '~> version known to work'
+
+Now you can do debug printouts like this:
+
+ my_list = [:a, :b, :c]
+ my_number = 5
+ debug.log("at the end of bar", "my_number", "my_list.size")
+
+The first argument to the log method is a comment and the following arguments are Ruby expression that will be evaluated. Here is an example of what the output can look like:
+
+ DebugLog | at the end of bar | my_number="5" (Fixnum), my_list.size="3" (Fixnum) | /Users/peter/tmp/debug-example.rb:7:in `foo'
+
+By default the logger will log to stdout, but you can change that through the configuration options:
+
+  DebugLog.logger = lambda { |message| Rails.logger.info(message) }
+  DebugLog.stdout = false # defaults to true
+  DebugLog.enabled = false # defaults to true
+
+== Credit
+
+The approach to patching the binding object was taken from Niclas Nilssons presentation "The Ruby advantage - metaprogramming and DSLs" at Nordic Ruby 2010. Niclas has packaged up his own solution to debug printouts in his {dp gem}[https://github.com/niclasnilsson/dp].
